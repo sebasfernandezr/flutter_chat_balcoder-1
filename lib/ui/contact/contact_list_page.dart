@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_balcoder/ui/contact/model/contact_model.dart';
-import 'package:flutter_chat_balcoder/ui/contact/model/contact_services.dart';
+import 'package:flutter_chat_balcoder/ui/contact/contact_services.dart';
 
 
 class ContactListPage extends StatefulWidget {
@@ -21,6 +21,7 @@ class _ContactListPageState extends State<ContactListPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white38,
       child: StreamBuilder(
         stream: _contactService.contactCollection.snapshots(),//Hacer que la ref bd nos traiga la info
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) { 
