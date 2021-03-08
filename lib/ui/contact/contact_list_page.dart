@@ -21,7 +21,7 @@ class _ContactListPageState extends State<ContactListPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white38,
+      color: Color(0xffe9fbfc),
       child: StreamBuilder(
         stream: _contactService.contactCollection.snapshots(),//Hacer que la ref bd nos traiga la info
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) { 
@@ -39,9 +39,15 @@ class _ContactListPageState extends State<ContactListPage> {
             return ListView.builder(
               itemCount: _contactList.length,
               itemBuilder: (BuildContext context, int index) { 
-                return ListTile(
-                  title: Text(_contactList[index].contactName),
-
+                return Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
+                  child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text(_contactList[index].contactName),
+                        trailing: Icon(Icons.more_vert),                   
+                    ),
+                  ),
                 );
                },);
           }

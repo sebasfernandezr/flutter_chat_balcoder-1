@@ -12,7 +12,7 @@ class ContactService {
     });
   }
 
-  deleteContact(){
+  deleteContact(ContactModel contactModel){
     
   }
 

@@ -23,19 +23,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xff0D5F64),
           bottom: TabBar(controller: _tabController,
           tabs: [
             Tab(icon: Icon(Icons.person)),
             Tab(icon: Icon(Icons.messenger_outline_rounded)),
           ],
           ),
-          title: Text("CHAT"),
+          title: Text("SarApp", style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.3, color: Colors.white),),
+          actions: [
+            Icon(Icons.menu),
+            SizedBox(width: 35.0,)
+          ],
         ),
         body: Center(child: TabBarView(
 
           children: [
             ContactListPage(),
-            Container(),
+            Container()
 
           ],
           controller: _tabController,
@@ -50,6 +55,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             }
             ));
         },
+        backgroundColor: Color(0xff094043),
         child: Icon(Icons.add)),
         );
       

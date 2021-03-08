@@ -20,12 +20,14 @@ class _ChatFormPageState extends State<ChatFormPage> {
     TextEditingController _cMessage = new TextEditingController();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff0D5F64),
         title: Text("ChatPage"),
       ),
-      backgroundColor: Colors.black87,
+      backgroundColor: Color(0xffe9fbfc),
       body: Column(
         children: [
           Container(
+            width: _widht,
             height: _height*0.8, 
             child: StreamBuilder(
         stream: _chatServices.chatCollection.orderBy('createdDate', descending: false).snapshots(),
@@ -41,21 +43,24 @@ class _ChatFormPageState extends State<ChatFormPage> {
             snapshot.data.docs.forEach((doc){
             _chatList.add(new ChatModel.fromSnapshot(doc));
             });
-              Future.delayed(const Duration(milliseconds: 100),(){
+              Future.delayed(const Duration(milliseconds: 1),(){
               _listViewController.animateTo(_listViewController.position.maxScrollExtent, 
               duration: Duration(milliseconds: 1), curve: Curves.fastOutSlowIn);
               });
             return ListView.builder(
               itemCount: _chatList.length,
               itemBuilder: (BuildContext context, int index) { 
-                return Container(
-                  decoration: BoxDecoration(color: _chatList[index].sendToUID == myUID ? Colors.blue : Colors.yellow, 
-                  borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(_chatList[index].message, style: TextStyle(color: Colors.white),),
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: _chatList[index].sendToUID == myUID ? Color(0xff36797D) : Color(0xff17A8B0), 
+                    borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(_chatList[index].message, style: TextStyle(color: Colors.white),),
+                    ),
+                    
                   ),
-                  
                 );
                },);
           }
@@ -67,7 +72,7 @@ class _ChatFormPageState extends State<ChatFormPage> {
                 width: _widht*0.8,
                 height: _height*0.2,
                 child: TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   controller: _cMessage,
                   decoration: InputDecoration(labelText: "Message",
                   focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0),
@@ -79,23 +84,26 @@ class _ChatFormPageState extends State<ChatFormPage> {
                   ),
                 ),
               ),
-              Container(
-                child: FloatingActionButton(
-                  mini: true,
-                  
-                  onPressed: (){
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Container(
+                  child: FloatingActionButton(
+                    mini: true,
+                    
+                    onPressed: (){
 
-                    ChatModel _chatModel = new ChatModel();
-                    _chatModel.message = _cMessage.text;
-                    _chatModel.sendToUID = "a123";
-                    _chatModel.uid = "de33";
-                    _chatModel.createdDate = new Timestamp.now();
+                      ChatModel _chatModel = new ChatModel();
+                      _chatModel.message = _cMessage.text;
+                      _chatModel.sendToUID = "a123";
+                      _chatModel.uid = "de33";
+                      _chatModel.createdDate = new Timestamp.now();
 
-                    _chatServices.addChat(_chatModel);
-                    _cMessage.text = "";
-                  }, child: Icon(Icons.send),
-                  ),
-                  
+                      _chatServices.addChat(_chatModel);
+                      _cMessage.text = "";
+                    }, child: Icon(Icons.send),
+                    ),
+                    
+                ),
               ),
             ],
           ),
