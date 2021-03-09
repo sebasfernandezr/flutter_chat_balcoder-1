@@ -14,6 +14,7 @@ class ContactService {
 
   deleteContact(ContactModel contactModel){
     contactModel.isDeleted = true;
+<<<<<<< HEAD
      contactCollection
      .doc(contactModel.key)
      .update(contactModel.toJson())
@@ -31,6 +32,13 @@ class ContactService {
      .then((value) {
       print("Guarde contacto");
      });
+=======
+    contactCollection.doc(contactModel.key).update(contactModel.toJson()).then((value){});
+  }
+
+  updateContact(ContactModel contactModel){
+    contactCollection.doc(contactModel.key).update(contactModel.toJson()).then((value){});
+>>>>>>> e66c1cfa11c74c406c7625e43083c60408ccc66c
   }
 
 

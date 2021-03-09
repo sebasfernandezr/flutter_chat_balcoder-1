@@ -39,7 +39,11 @@ android {
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+<<<<<<< HEAD
         multiDexEnabled true
+=======
+        multiDexEnabled: true
+>>>>>>> e66c1cfa11c74c406c7625e43083c60408ccc66c
     }
 
     buildTypes {

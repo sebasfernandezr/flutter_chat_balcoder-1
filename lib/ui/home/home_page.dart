@@ -49,7 +49,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         floatingActionButton: FloatingActionButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (_){
               if (_tabController.index == 0){
+<<<<<<< HEAD
               return ContactFormPage(contactModel:  new ContactModel(),);
+=======
+              return ContactFormPage(contactModel: new ContactModel(),);
+>>>>>>> e66c1cfa11c74c406c7625e43083c60408ccc66c
               }else {
               return ChatFormPage();
               }

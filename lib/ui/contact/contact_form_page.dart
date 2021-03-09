@@ -4,8 +4,12 @@ import 'package:flutter_chat_balcoder/ui/contact/model/contact_model.dart';
 
 
 class ContactFormPage extends StatefulWidget {
+<<<<<<< HEAD
 
   ContactFormPage({this.contactModel});
+=======
+  ContactFormPage ({this.contactModel});
+>>>>>>> e66c1cfa11c74c406c7625e43083c60408ccc66c
   ContactModel contactModel;
   @override
   _ContactFormPageState createState() => _ContactFormPageState();
@@ -18,6 +22,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
   List<ContactModel> _contactList = [];
 
   @override
+<<<<<<< HEAD
   void initState() { 
     super.initState();
     
@@ -27,6 +32,19 @@ class _ContactFormPageState extends State<ContactFormPage> {
       _nombreContacto.text = widget.contactModel.contactName;
     }else{
       //guardar
+=======
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget.contactModel.key != null){
+      //Actualizar
+      _numeroContacto.text = widget.contactModel.phoneNumber;
+      _nombreContacto.text = widget.contactModel.contactName;
+
+    }else{
+      //Contacto nuevo
+      
+>>>>>>> e66c1cfa11c74c406c7625e43083c60408ccc66c
     }
   }
 
@@ -82,6 +100,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
               style: TextButton.styleFrom(primary: Colors.white, backgroundColor: Color(0xff0F6B70), shadowColor: Colors.black, elevation: 15.0, 
               textStyle: TextStyle(letterSpacing: 2.0, fontWeight: FontWeight.bold)),
               onPressed: (){
+<<<<<<< HEAD
                 if(widget.contactModel.key !=null){
                   widget.contactModel.contactName = _nombreContacto.text;
                   widget.contactModel.phoneNumber = _numeroContacto.text;
@@ -90,12 +109,26 @@ class _ContactFormPageState extends State<ContactFormPage> {
 
                 }else{
                   _contactService.addContact(new ContactModel(contactName: _nombreContacto.text, phoneNumber: _numeroContacto.text,isDeleted: false));
+=======
+
+                if (widget.contactModel.key != null){
+
+                  widget.contactModel.contactName= _nombreContacto.text;
+                  widget.contactModel.phoneNumber= _numeroContacto.text;
+                  _contactService.updateContact(widget.contactModel);
+                }
+                else{
+                _contactService.addContact(new ContactModel(contactName: _nombreContacto.text, phoneNumber: _numeroContacto.text, isDeleted: false));
+>>>>>>> e66c1cfa11c74c406c7625e43083c60408ccc66c
                 _nombreContacto.text = "";
                 _numeroContacto.text = "";
 
                 }
                 
                 showAlertDialog(context);
+                }
+
+                
               },),
             )
 
