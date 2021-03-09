@@ -1,26 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+class ContactModel {
+  String key;
+  String contactName;
+  String phoneNumber;
+  bool isDeleted;
 
-class ContactModel{
+  ContactModel({this.contactName, this.phoneNumber, this.key, this.isDeleted});
 
-String contactName;
-String phoneNumber;
+  toJson() {
+    return {
+      "key": key,
+      "contactName": contactName,
+      "phoneNumber": phoneNumber,
+      "isDeleted": isDeleted
+    };
+  }
 
-ContactModel({this.contactName, this.phoneNumber});
-
-toJson(){
-  return {
-    "contactName": contactName,
-    "phoneNumber": phoneNumber,
-  };
-
-}
-
-  factory ContactModel.fromSnapshot(DocumentSnapshot snapshot){
-
+  factory ContactModel.fromSnapshot(DocumentSnapshot snapshot) {
     return ContactModel(
-      contactName: snapshot.data()['contactName'],
-      phoneNumber: snapshot.data()['phoneNumber']);
+        key: snapshot.id,
+        contactName: snapshot.data()['contactName'],
+        phoneNumber: snapshot.data()['phoneNumber'],
+        isDeleted:snapshot.data()['isDeletd']);
+        
   }
 }

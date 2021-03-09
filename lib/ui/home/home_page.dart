@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_balcoder/ui/chat/chat_form_page.dart';
 import 'package:flutter_chat_balcoder/ui/contact/contact_form_page.dart';
 import 'package:flutter_chat_balcoder/ui/contact/contact_list_page.dart';
+import 'package:flutter_chat_balcoder/ui/contact/model/contact_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         floatingActionButton: FloatingActionButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (_){
               if (_tabController.index == 0){
-              return ContactFormPage();
+              return ContactFormPage(contactModel:  new ContactModel(),);
               }else {
               return ChatFormPage();
               }

@@ -13,11 +13,24 @@ class ContactService {
   }
 
   deleteContact(ContactModel contactModel){
+    contactModel.isDeleted = true;
+     contactCollection
+     .doc(contactModel.key)
+     .update(contactModel.toJson())
+     .then((value) {
+      print("Guarde contacto");
+     });
     
+
   }
 
-  updateContact(){
-    
+  updateContact(ContactModel contactModel){
+     contactCollection
+     .doc(contactModel.key)
+     .update(contactModel.toJson())
+     .then((value) {
+      print("Guarde contacto");
+     });
   }
 
 
