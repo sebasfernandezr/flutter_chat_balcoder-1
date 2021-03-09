@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             Tab(icon: Icon(Icons.messenger_outline_rounded)),
           ],
           ),
-          title: Text("SarApp", style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.3, color: Colors.white),),
+          title: Text("Ultimate Chat Balcoder 2021", style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.3, color: Colors.white),),
           actions: [
             Icon(Icons.menu),
             SizedBox(width: 35.0,)
@@ -49,11 +49,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         floatingActionButton: FloatingActionButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (_){
               if (_tabController.index == 0){
-<<<<<<< HEAD
               return ContactFormPage(contactModel:  new ContactModel(),);
-=======
-              return ContactFormPage(contactModel: new ContactModel(),);
->>>>>>> e66c1cfa11c74c406c7625e43083c60408ccc66c
               }else {
               return ChatFormPage();
               }
