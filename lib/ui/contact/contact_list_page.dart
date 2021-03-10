@@ -3,14 +3,18 @@ import 'package:flutter_chat_balcoder/ui/contact/contact_form_page.dart';
 import 'package:flutter_chat_balcoder/ui/contact/model/contact_model.dart';
 import 'package:flutter_chat_balcoder/ui/contact/contact_services.dart';
 
+ContactService _contactService = new ContactService();
+List<ContactModel> _contactList = [];
+int index;
+
 class ContactListPage extends StatefulWidget {
   @override
   _ContactListPageState createState() => _ContactListPageState();
 }
 
 class _ContactListPageState extends State<ContactListPage> {
-  ContactService _contactService = new ContactService(); //usar metodo
-  List<ContactModel> _contactList = [];
+  //usar metodo
+
   @override
   void initState() {
     // TODO: implement initState
@@ -44,15 +48,14 @@ class _ContactListPageState extends State<ContactListPage> {
 
               return ListView.builder(
                 itemCount: _contactList.length,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (BuildContext context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(
                         left: 15.0, right: 15.0, top: 5.0),
                     child: Card(
                       child: ListTile(
                         leading: CircleAvatar(
-                          child: 
-                          Text(
+                          child: Text(
                               _contactList[index].contactName[0].toUpperCase()),
                         ),
                         onTap: () {
@@ -66,7 +69,42 @@ class _ContactListPageState extends State<ContactListPage> {
                         subtitle: Text(_contactList[index].phoneNumber),
                         trailing: GestureDetector(
                           onTap: () {
-                            _contactService.deleteContact(_contactList[index]);
+                            showAlertDialog(BuildContext context) {
+                              // set up the button
+                              Widget okButton = FlatButton(
+                                child: Text("Eliminar"),
+                                onPressed: () {
+                                  _contactService
+                                      .deleteContact(_contactList[index]);
+                                  Navigator.of(context).pop();
+                                },
+                              );
+
+                              Widget cancelButton = FlatButton(
+                                child: Text("Cancelar"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
+
+                              // set up the AlertDialog
+                              AlertDialog alert = AlertDialog(
+                                title: Text("¿Esta seguro?"),
+                                content: Text(
+                                    "esta a punto de eliminar el contacto"),
+                                actions: [okButton, cancelButton],
+                              );
+
+                              // show the dialog
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
+
+                            showAlertDialog(context);
                           },
                           child: Icon(Icons.delete),
                         ),
