@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_balcoder/ui/auth/auth_service.dart';
 import 'package:flutter_chat_balcoder/ui/contact/contact_list_page.dart';
 import 'package:flutter_chat_balcoder/ui/contact/contact_services.dart';
 import 'package:flutter_chat_balcoder/ui/contact/model/contact_model.dart';
 import 'package:flutter_chat_balcoder/ui/home/home_page.dart';
 
 class LoginFormPage extends StatefulWidget {
-  LoginFormPage({this.contactModel});
-  ContactModel contactModel;
+  AuthService authService;
+  final VoidCallback onLoggedIn;
+  LoginFormPage({this.authService, this.onLoggedIn});
+
   @override
   _LoginFormPageState createState() => _LoginFormPageState();
 }
 
 class _LoginFormPageState extends State<LoginFormPage> {
-  TextEditingController _username = new TextEditingController();
-  TextEditingController _numeroContacto = new TextEditingController();
+  TextEditingController _cEmail = new TextEditingController();
+  TextEditingController _cPassword = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +51,14 @@ class _LoginFormPageState extends State<LoginFormPage> {
                   padding: const EdgeInsets.only(
                       top: 4.0, left: 10.0, right: 10.0, bottom: 4.0),
                   child: TextFormField(
-                    controller: _username,
+                    controller: _cEmail,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       icon: Icon(
-                        Icons.person,
+                        Icons.email,
                         color: Color(0xffFFFFFF),
                       ),
-                      labelText: "Username",
+                      labelText: "Correo electrónico",
                       labelStyle: TextStyle(color: Color(0xffFFFFFF)),
                     ),
                   ),
@@ -73,7 +76,7 @@ class _LoginFormPageState extends State<LoginFormPage> {
                       top: 4.0, left: 10.0, right: 10.0, bottom: 4.0),
                   child: TextFormField(
                     obscureText: true,
-                    controller: _numeroContacto,
+                    controller: _cPassword,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       icon: Icon(
@@ -85,40 +88,41 @@ class _LoginFormPageState extends State<LoginFormPage> {
                     ),
                   ),
                 ),
-                
               ),
               SizedBox(
                 height: 50.0,
               ),
               Column(children: [
                 Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: Container(
-                      height: 40,
-                      width: 360,
-                      child: TextButton.icon(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          // child: Icon(widget.contactModel.key != null ? Icons.person : Icons.person_add_alt_1),
-                        ),
-                        label: Text("Iniciar Sesión"),
-                        style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.indigo[900],
-                            shadowColor: Colors.black,
-                            elevation: 15.0,
-                            textStyle: TextStyle(
-                                letterSpacing: 2.0,
-                                fontWeight: FontWeight.bold)),
-                        onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return HomePage();
-                  }));
-                        },
+                  padding: const EdgeInsets.all(14.0),
+                  child: Container(
+                    height: 40,
+                    width: 360,
+                    child: TextButton.icon(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        // child: Icon(widget.contactModel.key != null ? Icons.person : Icons.person_add_alt_1),
                       ),
+                      label: Text("Iniciar Sesión"),
+                      style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: Colors.indigo[900],
+                          shadowColor: Colors.black,
+                          elevation: 15.0,
+                          textStyle: TextStyle(
+                              letterSpacing: 2.0, fontWeight: FontWeight.bold)),
+                      onPressed: ()async {
+                        var uid = await widget.authService.signIn(_cEmail.text, _cPassword.text);
+                        widget.onLoggedIn();
+
+                        
+                      },
                     ),
                   ),
-                SizedBox(height: 20.0,),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Text("Sing with", style: TextStyle(color: Colors.white)),
               ]),
               SizedBox(
@@ -126,7 +130,6 @@ class _LoginFormPageState extends State<LoginFormPage> {
               ),
               Column(
                 children: [
-                  
                   Container(
                     height: 40,
                     width: 360,
